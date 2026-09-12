@@ -136,3 +136,37 @@ button {
   line-height: 1.7;
   max-width: 720px;
 }
+
+.badge {
+  border: 1px solid;
+  border-radius: 999px;
+  color: var(--ink);
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+}
+
+.badge-open {
+  background: color-mix(in srgb, var(--accent), var(--card) 82%);
+  border-color: var(--accent);
+}
+
+.badge-blocked {
+  background: color-mix(in srgb, var(--danger), var(--card) 82%);
+  border-color: var(--danger);
+}
+
+.badge-done {
+  background: color-mix(in srgb, var(--ok), var(--card) 82%);
+  border-color: var(--ok);
+}
+
+.srOnly {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
