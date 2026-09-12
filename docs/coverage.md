@@ -22,28 +22,34 @@ simply absent and the number flatters us. Vitest 4 made this the default for wha
 
 ## Today's numbers
 
-Measured on `main` with the suite CI currently runs:
-
 | Metric | Coverage | Threshold |
 | --- | --- | --- |
-| statements | 7.69% | 7% |
-| branches | 0% | 0% |
-| functions | 6.66% | 6% |
-| lines | 8% | 7% |
+| statements | 59.57% | 59% |
+| branches | 66.66% | 66% |
+| functions | 50% | 49% |
+| lines | 60.46% | 60% |
 
-Only `lib/projects.ts` has any coverage, because `npm test` runs only `tests/projects`.
+**The 50% destination has been reached.** Not by writing new tests, but by measuring
+the ones that already existed.
 
-## Why it is so low, and the one change that fixes most of it
+## How it got there
+
+For a while coverage sat at 7.69% of statements, and only `lib/projects.ts` had any at
+all, because the measured suite was `vitest run tests/projects`.
 
 The four contract tests in `tests/actions/` exercise the actions route, `lib/actions.ts`
-and `lib/errors.ts`. Together those are more than half the source lines being measured.
+and `lib/errors.ts`, which are most of the source lines. They simply were not being run.
+That was finding 1 in `docs/open-findings.md`.
 
-**They do not run in CI.** `npm test` is `vitest run tests/projects`, and nothing calls
-`npm run test:actions`. This is finding 1 in `docs/open-findings.md`.
+`test:coverage` now runs the whole suite with `INCLUDE_ACTION_CONTRACTS=1`, so those
+four tests count. Coverage went from 4.25% to 59.57% of statements without a single new
+test being written.
 
-Once the actions stack is merged and those tests run as part of the measured suite,
-coverage rises sharply without anyone writing a new test. That is the moment to raise
-the thresholds, and it is a much bigger step than any single ticket will give.
+**This also closes finding 1.** The contract tests are now part of what CI runs, so the
+agreement in `docs/contract/actions.yaml` is enforced on every pull request rather than
+only when someone remembers to run it.
+
+The next real gains need component tests, which need a DOM environment. See below.
 
 ## Raising the thresholds
 
