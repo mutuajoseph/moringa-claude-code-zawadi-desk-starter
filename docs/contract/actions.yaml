@@ -51,6 +51,7 @@ rules:
   - empty lists return [] instead of null.
 
 decisions:
-  - "TODO: decide sort order."
-  - "TODO: decide owner validation."
-  - "TODO: decide whether done actions appear in the default list."
+  - "Sort order: newest first (createdAt descending), sorted on the server."
+  - "Owner validation: required, trimmed, rejected like a blank title."
+  - "Done actions: kept in the default list. The status badge distinguishes them."
+  - "Action id: crypto.randomUUID(). nanoid does not produce UUIDs."
