@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { listActions } from "@/lib/actions";
 import { projectNotFound } from "@/lib/errors";
 import { findProject } from "@/lib/projects";
 
@@ -11,10 +12,7 @@ export async function GET(_request: NextRequest, context: RouteContext) {
   if (!findProject(projectId)) {
     return NextResponse.json(projectNotFound(projectId), { status: 404 });
   }
-  return NextResponse.json(
-    { code: "NOT_IMPLEMENTED", message: "Dev A builds this endpoint during the workshop." },
-    { status: 501 },
-  );
+  return NextResponse.json(listActions(projectId));
 }
 
 export async function POST(_request: NextRequest, context: RouteContext) {

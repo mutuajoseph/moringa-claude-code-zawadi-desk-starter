@@ -16,8 +16,11 @@ export type ActionList = {
 
 const actionsByProject = new Map<string, Action[]>();
 
-export function listActions(projectId: string) {
-  return actionsByProject.get(projectId) ?? [];
+export function listActions(projectId: string): ActionList {
+  const items = [...(actionsByProject.get(projectId) ?? [])].sort((a, b) =>
+    b.createdAt.localeCompare(a.createdAt),
+  );
+  return { items, total: items.length };
 }
 
 export function addAction(projectId: string, action: Action) {
