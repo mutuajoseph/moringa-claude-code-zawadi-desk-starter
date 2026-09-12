@@ -23,10 +23,27 @@ threshold. A failed gate is the headline, not a footnote.
 A bare percentage does not tell a reviewer whether to merge. The useful number is the
 direction of travel.
 
-Measure the base branch the same way, then report both and the delta. Restore the
-working tree afterwards, and confirm it is restored before moving on.
+Measuring the base is not simply checking it out and rerunning. The base often has no
+coverage setup at all: no `test:coverage` script, no provider in its lockfile, and no
+coverage block in its `vitest.config.ts`. A plain checkout of it cannot produce a number.
 
-If the base cannot be measured, say that instead of implying the number is new.
+Replace only the **source** under test, and keep this branch's measuring apparatus:
+
+```
+git worktree add <dir> <base-ref>
+ln -s "$PWD/node_modules" <dir>/node_modules   # the provider is installed here
+cp vitest.config.ts <dir>/vitest.config.ts     # so both sides are measured alike
+cd <dir> && npx vitest run <same test paths> --coverage
+```
+
+Then remove the worktree and confirm the tree is clean before moving on. A worktree
+keeps this out of your checkout entirely, so there is nothing to restore.
+
+Measuring both sides with the same configuration is the point. A delta between two
+different coverage configurations is meaningless.
+
+If the base still cannot be measured, say so plainly rather than reporting the branch
+number as though it were new.
 
 ## 3. Say which files the pull request left uncovered
 
@@ -35,6 +52,11 @@ and makes the comment too long to read.
 
 For each, give the percentage and the uncovered line numbers. A reviewer can act on
 "lines 12 to 17 are untested"; they cannot act on "62%".
+
+Uncovered line numbers come from `coverage/coverage-final.json`, **not** from
+`coverage-summary.json`. The summary carries totals only. Derive them by taking the
+entries in a file's `statementMap` whose counter in `s` is `0`, and reading
+`start.line` from each.
 
 ## 4. Post it
 

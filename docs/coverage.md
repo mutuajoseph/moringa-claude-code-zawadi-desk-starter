@@ -11,6 +11,10 @@ at 50% today would just block every push.
 `npm run test:coverage` runs the test suite and measures it with `@vitest/coverage-v8`.
 CI runs the same command, so the gate is identical locally and on a pull request.
 
+Three reporters are written. `text-summary` is for reading, `json-summary` holds the
+totals the gate checks, and `json` holds per-line data. Only the last of those can say
+*which* lines are uncovered, which is what `/coverage-report` needs.
+
 `coverage.include` decides what is counted, and every file it matches appears in the
 report whether or not a test imported it. That matters: without it, an untested file is
 simply absent and the number flatters us. Vitest 4 made this the default for whatever

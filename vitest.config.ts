@@ -16,7 +16,10 @@ export default defineConfig({
       // this is now the default behaviour for whatever `include` matches.)
       include: ["lib/**/*.ts", "app/**/*.ts", "app/**/*.tsx", "components/**/*.tsx"],
       exclude: ["**/*.d.ts", "app/layout.tsx"],
-      reporter: ["text-summary", "json-summary"],
+      // text-summary for humans, json-summary for the totals, and json for
+      // per-line data. json-summary carries only totals, so without "json"
+      // there is no way to say which lines are uncovered.
+      reporter: ["text-summary", "json-summary", "json"],
       reportsDirectory: "coverage",
       // A ratchet, not a target. These sit just below the current numbers so
       // coverage can never fall, and they are raised as tests land.
