@@ -74,3 +74,20 @@ environment and `@testing-library` is not installed. Rendering tests would need 
 They are deliberately still counted rather than excluded, because excluding them would
 make the number look better while testing nothing. The gap is real and the report
 should show it.
+
+## The push hook
+
+`.claude/hooks/coverage-gate.sh` runs the same command before a push made through
+Claude and blocks the push if the gate fails. It is wired up in
+`.claude/settings.json` as a `PreToolUse` hook on `Bash`.
+
+It is a convenience, not a guarantee. It only sees work done through Claude, so a push
+typed directly into a terminal walks straight past it. **CI is the real enforcement**,
+because it binds the pull request rather than the person.
+
+Anything that is not a push passes through in a few milliseconds, so ordinary commands
+are unaffected. A push costs roughly a second while the suite runs.
+
+If the check cannot run at all, for example in a checkout with no `test:coverage`
+script, the hook allows the push rather than blocking every command in a project that
+never opted in.
