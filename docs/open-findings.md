@@ -69,7 +69,7 @@ document. Worth doing before the actions branch merges, not after.
 dueDate: string ISO 8601 | null
 ```
 
-The implementation on `feat/actions-route-dev-a` validates it as:
+The implementation in pull request 5 (`feat/actions-create-endpoint`) validates it as:
 
 ```ts
 dueDate: z.string().datetime().nullish()
