@@ -1,7 +1,7 @@
 ---
 description: Review a pull request against the workshop checklist, then post the findings, architecture and design intent onto the pull request
 argument-hint: <pr-number>
-allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr list:*), Bash(gh pr checks:*), Bash(gh api:*), Bash(git log:*), Bash(git diff:*), Bash(git show:*)
+allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr list:*), Bash(gh pr checks:*), Bash(gh api /repos/:*), Bash(gh api --method POST /repos/:*), Bash(git log:*), Bash(git diff:*), Bash(git show:*)
 ---
 
 Review PR $ARGUMENTS against `docs/review-checklist.md`, then post the result onto the
