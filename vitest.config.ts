@@ -23,12 +23,13 @@ export default defineConfig({
       reportsDirectory: "coverage",
       // A ratchet, not a target. These sit just below the current numbers so
       // coverage can never fall, and they are raised as tests land.
-      // Destination is 50%. See docs/coverage.md for how to raise them.
+      // The 50% destination was reached once the contract tests joined the
+      // measured suite. See docs/coverage.md for how to raise them further.
       thresholds: {
-        statements: 7,
-        branches: 0,
-        functions: 6,
-        lines: 7,
+        statements: 59,
+        branches: 66,
+        functions: 49,
+        lines: 60,
       },
     },
   },

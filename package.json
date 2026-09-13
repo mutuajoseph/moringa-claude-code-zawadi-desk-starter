@@ -12,7 +12,7 @@
     "test:actions": "INCLUDE_ACTION_CONTRACTS=1 vitest run tests/actions/contract.spec.ts",
     "lint": "tsc --noEmit",
     "format": "prettier --write .",
-    "test:coverage": "vitest run tests/projects --coverage"
+    "test:coverage": "INCLUDE_ACTION_CONTRACTS=1 vitest run --coverage"
   },
   "dependencies": {
     "nanoid": "^5.0.7",
