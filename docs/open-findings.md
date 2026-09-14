@@ -6,19 +6,26 @@ each one names who it lands on. Nothing here is a matter of taste.
 Raised for review by both devs. Items 1 and 2 affect the backend directly and
 are the reason this document exists rather than a chat message.
 
-| # | Finding | Lands on | Blocks |
-| --- | --- | --- | --- |
-| 1 | CI never runs the contract tests | Dev A | Yes |
-| 2 | Due date validation is stricter than the contract | Dev A and Dev B | Yes, at the seam |
-| 3 | Page overflows at phone width | Both | Before demo |
-| 4 | Project status badges fail the contrast bar | Dev B | No |
-| 5 | A malformed due date reads as "no deadline" | Dev B | No |
-| 6 | The merge guard rail never fires | Lead | No |
-| 7 | Stored actions vanish on restart | Dev A | No, by design |
+**Status:** findings 1 and 6 are resolved. The rest are open.
+
+| # | Finding | Lands on | Blocks | Status |
+| --- | --- | --- | --- | --- |
+| 1 | CI never runs the contract tests | Dev A | Yes | **Resolved** |
+| 2 | Due date validation is stricter than the contract | Dev A and Dev B | Yes, at the seam | Open |
+| 3 | Page overflows at phone width | Both | Before demo | Open |
+| 4 | Project status badges fail the contrast bar | Dev B | No | Open |
+| 5 | A malformed due date reads as "no deadline" | Dev B | No | Open |
+| 6 | The merge guard rail never fires | Lead | No | **Resolved** |
+| 7 | Stored actions vanish on restart | Dev A | No, by design | Open, by design |
 
 ---
 
-## 1. CI never runs the contract tests
+## 1. CI never runs the contract tests — RESOLVED
+
+> **Resolved.** `test:coverage` now runs the whole suite with
+> `INCLUDE_ACTION_CONTRACTS=1`, and CI runs that command, so the contract tests run on
+> every pull request. Kept here because the reasoning below explains why a green badge
+> can mean nothing, which is worth reading before trusting the next one.
 
 **A green CI badge does not mean the actions feature works.**
 
@@ -184,7 +191,11 @@ would then be the only source of due dates and it validates them.
 
 ---
 
-## 6. The merge guard rail never fires
+## 6. The merge guard rail never fires — RESOLVED
+
+> **Resolved.** `.claude/settings.json` now has a `hooks` key wiring both hooks, and
+> `.claude/hooks/test-hooks.sh` covers them. Enabling it exposed a second bug in the
+> matcher, which is written up in `docs/tour.md` section 6.
 
 `.claude/hooks/block-prod-merge.sh` exists and is executable. It refuses merges
 and pushes to `main`.
