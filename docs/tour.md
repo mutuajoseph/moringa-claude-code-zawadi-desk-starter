@@ -161,6 +161,7 @@ This was not theoretical. See section 6.
 | `docs/build-map.md` | The codebase and the flows, as diagrams |
 | `docs/open-findings.md` | Seven reproducible gaps with a status column; five still open |
 | `docs/coverage.md` | Today's numbers, how to raise the floor, what not to do |
+| `docs/graft.md` | An optional local code index, and when it beats `grep` |
 | `docs/tour.md` | This file |
 
 Two are worth opening even if you skip the rest.
@@ -307,3 +308,4 @@ npm run build          # production build
 - `docs/contract/actions.yaml` — what the two halves agreed
 - `docs/build-map.md` — the same thing as diagrams
 - `docs/open-findings.md` — what is still open, and who owns it (check the status column; two are resolved)
+- `docs/graft.md` — if you would rather query the codebase than read it
