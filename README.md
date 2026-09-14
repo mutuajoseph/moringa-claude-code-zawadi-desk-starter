@@ -5,6 +5,9 @@ Starter repository for the Moringa Claude Code live workshop.
 **New here? Read [`docs/tour.md`](docs/tour.md)** — a guided walk through the code, the
 agent guard rails in `.claude/`, the documents, and the mistakes that produced each rule.
 
+Finding your way around: [`docs/graft.md`](docs/graft.md) — a local index that answers
+"where does this live" and "what breaks if I change it". One command to set up, optional.
+
 Zawadi Desk is a small Next.js operations tool designed to deploy cleanly on Vercel. It already has a complete `projects` feature and the start of an `actions` feature. During the workshop, pairs agree the `actions` contract, build one side each, review each other, and merge.
 
 ## Setup
